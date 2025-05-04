@@ -87,6 +87,7 @@ public class Program
         builder.Services.AddTransient<IEmployeeImageRepository, EmployeeImageRepository>();
         builder.Services.AddTransient<IEmployeeAttendanceRepository, EmployeeAttendanceRepository>();
         builder.Services.AddTransient<ICompanyRepository,CompanyRepository>();
+        builder.Services.AddTransient<IJobService, JobService>();   
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         builder.Services.AddCors(options =>
         {

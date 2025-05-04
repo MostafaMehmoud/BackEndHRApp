@@ -19,6 +19,10 @@ public class UnitOfWork : IUnitOfWork
 
     public ICompanyRepository CompanyRepository { get; private set; }
 
+    public IManageRepository ManageRepository { get; private set; }
+
+    public IJobRepository JobRepository { get; private set; }
+
     public UnitOfWork(HrAppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -31,6 +35,8 @@ public class UnitOfWork : IUnitOfWork
         UploadFileRepository = UploadFileRepository ?? new UploadFileRepository(dbContext);
         EmployeeAttendanceRepository = EmployeeAttendanceRepository ?? new EmployeeAttendanceRepository(dbContext);
         CompanyRepository=CompanyRepository??new CompanyRepository(dbContext);
+        ManageRepository= ManageRepository ?? new ManageRepository(dbContext);
+        JobRepository=JobRepository ?? new JobRepository(dbContext);    
     }
     public async Task CommitTransaction()
     {

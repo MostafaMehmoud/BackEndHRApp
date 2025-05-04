@@ -24,6 +24,7 @@ public class HrAppDbContext :DbContext
     public DbSet<Manage> Manages { get; set; }
 
     public DbSet<Company> Companys { get; set; }    
+    public DbSet<Job> Jobs { get; set; }    
     public HrAppDbContext()
     {
         

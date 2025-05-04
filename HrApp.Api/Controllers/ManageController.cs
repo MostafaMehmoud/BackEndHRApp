@@ -1,6 +1,8 @@
 ﻿using HrApp.Api.Attributes;
+using HrApp.BL.Services;
 using HrApp.BL.Services.IServices;
 using HrApp.DAL.Dtos;
+using HrApp.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -22,6 +24,44 @@ public class ManageController : AppControllerBase
     {
         var result = await _manageService.GetAllManageAsync();
         return Ok(result);
+    }
+    [HttpPost("GetAllManages")]
+    [SwaggerOperation(Summary = "عرض جميع الادارات", OperationId = "GetAllManages")]
+    public async Task<ApiResponse<List<Manage>>> GetAllManages()
+    {
+        return await _manageService.GetAll();
+    }
+
+
+    [HttpPost("GetManageById")]
+    [SwaggerOperation(Summary = "عرض الادارة عن طريق ID", OperationId = "GetManageById")]
+    public async Task<ApiResponse<Manage>> GetManageById([FromQuery] string id)
+    {
+        return await _manageService.GetById(id);
+    }
+
+
+    [HttpPost("AddManage")]
+    [SwaggerOperation(Summary = "إضافة الادارة جديدة", OperationId = "AddManage")]
+    public async Task<ApiResponse<Manage>> AddManage([FromBody] CreateManage model)
+    {
+        return await _manageService.Add(model);
+    }
+
+
+    [HttpPut("UpdateManage")]
+    [SwaggerOperation(Summary = "تعديل بيانات الادارة", OperationId = "UpdateManage")]
+    public async Task<ApiResponse<Manage>> UpdateManage([FromBody] UpdateManage model)
+    {
+        return await _manageService.Update(model);
+    }
+
+
+    [HttpDelete("DeleteManage")]  // استخدم DELETE بدلاً من POST
+    [SwaggerOperation(Summary = "حذف الادارة", OperationId = "DeleteManage")]
+    public async Task<ApiResponse<Manage>> DeleteManage([FromQuery] string id)
+    {
+        return await _manageService.Delete(id);
     }
 
 }

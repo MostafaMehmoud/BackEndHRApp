@@ -12,6 +12,8 @@ public interface IUnitOfWork
     IUploadFileRepository UploadFileRepository { get; }
     IEmployeeAttendanceRepository EmployeeAttendanceRepository { get; }
     ICompanyRepository CompanyRepository { get; }   
+    IManageRepository ManageRepository { get; } 
+    IJobRepository JobRepository { get; }   
     public Task StartTransaction();
     public Task CommitTransaction();
     public Task RollbackTransaction();
