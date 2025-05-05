@@ -69,7 +69,7 @@ namespace HrApp.DAL.Repository
             }
             catch
             {
-                return false;
+                throw;
             }
         }
         public async Task<bool> AddWithSPAsync(Company company)
@@ -116,7 +116,7 @@ namespace HrApp.DAL.Repository
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 

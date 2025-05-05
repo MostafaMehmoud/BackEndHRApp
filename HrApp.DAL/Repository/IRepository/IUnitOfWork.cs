@@ -14,6 +14,7 @@ public interface IUnitOfWork
     ICompanyRepository CompanyRepository { get; }   
     IManageRepository ManageRepository { get; } 
     IJobRepository JobRepository { get; }   
+    IReligionRepository ReligionRepository { get; }   
     public Task StartTransaction();
     public Task CommitTransaction();
     public Task RollbackTransaction();

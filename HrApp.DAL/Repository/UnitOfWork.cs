@@ -23,6 +23,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IJobRepository JobRepository { get; private set; }
 
+    public IReligionRepository ReligionRepository { get; private set; }
+
     public UnitOfWork(HrAppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -36,7 +38,8 @@ public class UnitOfWork : IUnitOfWork
         EmployeeAttendanceRepository = EmployeeAttendanceRepository ?? new EmployeeAttendanceRepository(dbContext);
         CompanyRepository=CompanyRepository??new CompanyRepository(dbContext);
         ManageRepository= ManageRepository ?? new ManageRepository(dbContext);
-        JobRepository=JobRepository ?? new JobRepository(dbContext);    
+        JobRepository=JobRepository ?? new JobRepository(dbContext);
+        ReligionRepository = ReligionRepository??new ReligionRepository(dbContext); 
     }
     public async Task CommitTransaction()
     {

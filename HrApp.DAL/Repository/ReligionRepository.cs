@@ -10,36 +10,35 @@ using HrApp.DAL.Entities;
 using HrApp.DAL.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace HrApp.DAL.Repository
 {
-    public class ManageRepository : GenericRepository<Manage>, IManageRepository
+    public class ReligionRepository : GenericRepository<Religion>, IReligionRepository
     {
-        public ManageRepository(HrAppDbContext dbContext) : base(dbContext)
+        public ReligionRepository(HrAppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<bool> AddWithSPAsync(Manage manage)
+        public async Task<bool> AddWithSPAsync(Religion religion)
         {
             try
             {
-                var idParam = new OracleParameter("MNG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("RELIG_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.Id
+                    Value = religion.Id
                 };
 
-                var nameParam = new OracleParameter("MNG_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("RELIG_NAME ", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.NameAr
+                    Value = religion.NameAr
                 };
 
-                var nameEParam = new OracleParameter("MNG_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("RELIG_NAME_E ", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.NameEn
+                    Value = religion.NameEn
                 };
 
                 var isAddNewParam = new OracleParameter("ISAddNew", OracleDbType.Int32)
@@ -54,7 +53,7 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddMANAGESP(:MNG_ID, :MNG_NAME, :MNG_NAME_E, :ISAddNew, :resultcheck); END;",
+                    "BEGIN HR_SAddRELIGIONSP(:RELIG_ID, :RELIG_NAME, :RELIG_NAME_E, :ISAddNew, :resultcheck); END;",
                     idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
                 );
 
@@ -65,34 +64,35 @@ namespace HrApp.DAL.Repository
             catch
             {
                 throw;
+                
             }
         }
 
-        public async Task<Manage> GetByIdTypeStringAsync(string id)
+        public async Task<Religion> GetByIdTypeStringAsync(string id)
         {
-            return await _dbContext.Manages.FindAsync(id);
+            return await _dbContext.religions.FindAsync(id);
         }
 
-        public async Task<bool> UpdateWithSPAsync(Manage manage)
+        public async Task<bool> UpdateWithSPAsync(Religion religion)
         {
             try
             {
-                var idParam = new OracleParameter("MNG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("RELIG_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.Id
+                    Value = religion.Id
                 };
 
-                var nameParam = new OracleParameter("MNG_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("RELIG_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.NameAr
+                    Value = religion.NameAr
                 };
 
-                var nameEParam = new OracleParameter("MNG_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("RELIG_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = manage.NameEn
+                    Value = religion.NameEn
                 };
 
                 var isAddNewParam = new OracleParameter("ISAddNew", OracleDbType.Int32)
@@ -107,7 +107,7 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddMANAGESP(:MNG_ID, :MNG_NAME, :MNG_NAME_E, :ISAddNew, :resultcheck); END;",
+                    "BEGIN HR_SAddRELIGIONSP(:RELIG_ID, :RELIG_NAME, :RELIG_NAME_E, :ISAddNew, :resultcheck); END;",
                     idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
                 );
 

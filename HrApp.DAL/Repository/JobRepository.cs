@@ -63,7 +63,7 @@ namespace HrApp.DAL.Repository
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -116,7 +116,7 @@ namespace HrApp.DAL.Repository
             }
             catch
             {
-                return false;
+                throw;
             }
         }
     }
