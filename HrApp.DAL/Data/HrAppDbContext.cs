@@ -26,6 +26,11 @@ public class HrAppDbContext :DbContext
     public DbSet<Company> Companys { get; set; }    
     public DbSet<Job> Jobs { get; set; }    
     public DbSet<Religion> religions { get; set; }
+    public DbSet<Nation> nations { get; set; }  
+    public DbSet<City> Cities { get; set; }
+    public DbSet<Country> Countries { get; set; }
+    public DbSet<College> Colleges { get; set; }    
+    public DbSet<Neighbor> Neighbors { get; set; }
     public HrAppDbContext()
     {
         

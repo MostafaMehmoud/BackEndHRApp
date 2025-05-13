@@ -25,6 +25,17 @@ public class UnitOfWork : IUnitOfWork
 
     public IReligionRepository ReligionRepository { get; private set; }
 
+    public INationRepository NationRepository { get; private set; }
+
+    public IBranchRepository BranchRepository { get; private set; }
+
+    public ICityRepository CityRepository { get; private set; }
+
+    public ICountryRepository CountryRepository { get; private set; }
+    public ICollegeRepository CollegeRepository { get; private set; }
+
+    public INeighborRepository NeighborRepository { get; private set; }
+
     public UnitOfWork(HrAppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -39,7 +50,14 @@ public class UnitOfWork : IUnitOfWork
         CompanyRepository=CompanyRepository??new CompanyRepository(dbContext);
         ManageRepository= ManageRepository ?? new ManageRepository(dbContext);
         JobRepository=JobRepository ?? new JobRepository(dbContext);
-        ReligionRepository = ReligionRepository??new ReligionRepository(dbContext); 
+        ReligionRepository = ReligionRepository??new ReligionRepository(dbContext);
+
+        NationRepository=NationRepository??new NationRepository(dbContext);
+        BranchRepository= BranchRepository??new BranchRepository(dbContext);
+        CityRepository= CityRepository??new CityRepository(dbContext);
+        CountryRepository=CountryRepository??new CountryRepository(dbContext); 
+        CollegeRepository= CollegeRepository??new CollegeRepository(dbContext);
+        NeighborRepository= NeighborRepository??new NeighborRepository(dbContext);
     }
     public async Task CommitTransaction()
     {

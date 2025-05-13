@@ -13,47 +13,52 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace HrApp.DAL.Repository
 {
-    public class ReligionRepository : GenericRepository<Religion>, IReligionRepository
+    public class NationRepository : GenericRepository<Nation>, INationRepository
     {
-        public ReligionRepository(HrAppDbContext dbContext) : base(dbContext)
+        public NationRepository(HrAppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<bool> AddWithSPAsync(Religion religion)
+        public async Task<Nation> GetByIdTypeStringAsync(string id)
+        {
+
+            return await _dbContext.nations.FindAsync(id);
+        }
+        public async Task<bool> UpdateWithSPAsync(Nation nation)
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("NATION_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.Id
+                    Value = nation.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME ", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("NATION_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameAr
+                    Value = nation.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E ", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("NATION_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameEn
+                    Value = nation.NameEn
                 };
 
                 var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = 1 // 1 for insert (0 if you want to update)
+                    Value = 0 // 0 means update
                 };
 
-                var resultCheckParam = new OracleParameter("resultcheck ", OracleDbType.Varchar2, 4000)
+                var resultCheckParam = new OracleParameter("Ret", OracleDbType.Varchar2, 4000)
                 {
                     Direction = ParameterDirection.Output
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck); END;",
+                    "BEGIN HR_SADDNATIONSP(:NATION_ID, :NATION_NAME, :NATION_NAME_E, :isaddnew, :Ret); END;",
                     idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
                 );
 
@@ -64,50 +69,43 @@ namespace HrApp.DAL.Repository
             catch
             {
                 throw;
-                
             }
         }
-
-        public async Task<Religion> GetByIdTypeStringAsync(string id)
-        {
-            return await _dbContext.religions.FindAsync(id);
-        }
-
-        public async Task<bool> UpdateWithSPAsync(Religion religion)
+        public async Task<bool> AddWithSPAsync(Nation nation)
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("NATION_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.Id
+                    Value = nation.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("NATION_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameAr
+                    Value = nation.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("NATION_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameEn
+                    Value = nation.NameEn
                 };
 
                 var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = 0 // 0 means update
+                    Value = 1 // 1 for insert (0 if you want to update)
                 };
 
-                var resultCheckParam = new OracleParameter("resultcheck", OracleDbType.Varchar2, 4000)
+                var resultCheckParam = new OracleParameter("Ret", OracleDbType.Varchar2, 4000)
                 {
                     Direction = ParameterDirection.Output
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck ); END;",
+                    "BEGIN HR_SADDNATIONSP(:NATION_ID, :NATION_NAME, :NATION_NAME_E, :isaddnew, :Ret); END;",
                     idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
                 );
 

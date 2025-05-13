@@ -67,7 +67,7 @@ public class Program
         builder.Services.AddScoped<IEmployeeAttendanceService, EmployeeAttendanceService>();
         builder.Services.AddScoped<IManageService, ManageService>();
         builder.Services.AddScoped<IBranchService, BranchService>();
-        builder.Services.AddScoped<ICompanyService, CompanyService>();  
+        builder.Services.AddScoped<ICompanyService, CompanyService>();
         builder.Services.AddDbContext<HrAppDbContext>(opt =>
         {
             opt.UseOracle(configration.GetConnectionString("HrAppDatabase"));
@@ -86,9 +86,14 @@ public class Program
         builder.Services.AddTransient<IAuthLogRepository, AuthLogRepository>();
         builder.Services.AddTransient<IEmployeeImageRepository, EmployeeImageRepository>();
         builder.Services.AddTransient<IEmployeeAttendanceRepository, EmployeeAttendanceRepository>();
-        builder.Services.AddTransient<ICompanyRepository,CompanyRepository>();
-        builder.Services.AddTransient<IJobService, JobService>();   
-        builder.Services.AddTransient<IReligionService, ReligionService>();   
+        builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
+        builder.Services.AddTransient<IJobService, JobService>();
+        builder.Services.AddTransient<IReligionService, ReligionService>();
+        builder.Services.AddTransient<INationService, NationService>();
+        builder.Services.AddTransient <ICityService, CityService>();   
+        builder.Services.AddTransient<ICountryService, CountryService>();   
+        builder.Services.AddTransient<ICollegeService, CollegeService>();   
+        builder.Services.AddTransient<INeighborService,NeighborService>();
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         builder.Services.AddCors(options =>
         {

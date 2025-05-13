@@ -14,7 +14,13 @@ public interface IUnitOfWork
     ICompanyRepository CompanyRepository { get; }   
     IManageRepository ManageRepository { get; } 
     IJobRepository JobRepository { get; }   
-    IReligionRepository ReligionRepository { get; }   
+    IReligionRepository ReligionRepository { get; } 
+    INationRepository NationRepository { get; }
+    IBranchRepository BranchRepository { get; }
+    ICityRepository CityRepository { get; }
+    ICountryRepository CountryRepository { get; }
+    ICollegeRepository CollegeRepository { get; }
+    INeighborRepository NeighborRepository { get; }  
     public Task StartTransaction();
     public Task CommitTransaction();
     public Task RollbackTransaction();

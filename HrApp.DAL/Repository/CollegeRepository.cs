@@ -13,48 +13,48 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace HrApp.DAL.Repository
 {
-    public class ReligionRepository : GenericRepository<Religion>, IReligionRepository
+    public class CollegeRepository : GenericRepository<College>, ICollegeRepository
     {
-        public ReligionRepository(HrAppDbContext dbContext) : base(dbContext)
+        public CollegeRepository(HrAppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<bool> AddWithSPAsync(Religion religion)
+        public async Task<bool> AddWithSPAsync(College College)
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("mCOLL_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.Id
+                    Value = College.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME ", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("mCOLL_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameAr
+                    Value = College.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E ", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("mCOLL_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameEn
+                    Value = College.NameEn
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var isaddnewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 1 // 1 for insert (0 if you want to update)
                 };
 
-                var resultCheckParam = new OracleParameter("resultcheck ", OracleDbType.Varchar2, 4000)
+                var resultCheckParam = new OracleParameter("resultcheck", OracleDbType.Varchar2, 4000)
                 {
                     Direction = ParameterDirection.Output
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck); END;",
-                    idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
+                    "BEGIN HR_SADDCOLLEGESP(:mCOLL_ID, :mCOLL_NAME, :mCOLL_NAME_E, :isaddnew, :resultcheck); END;",
+                    idParam, nameParam, nameEParam, isaddnewParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();
@@ -64,38 +64,37 @@ namespace HrApp.DAL.Repository
             catch
             {
                 throw;
-                
             }
         }
 
-        public async Task<Religion> GetByIdTypeStringAsync(string id)
+        public async Task<College> GetByIdTypeStringAsync(string id)
         {
-            return await _dbContext.religions.FindAsync(id);
+            return await _dbContext.Colleges.FindAsync(id);
         }
 
-        public async Task<bool> UpdateWithSPAsync(Religion religion)
+        public async Task<bool> UpdateWithSPAsync(College College)
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("mCOLL_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.Id
+                    Value = College.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("mCOLL_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameAr
+                    Value = College.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("mCOLL_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
-                    Value = religion.NameEn
+                    Value = College.NameEn
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var isaddnewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 0 // 0 means update
@@ -107,8 +106,8 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck ); END;",
-                    idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
+                     "BEGIN HR_SADDCOLLEGESP(:mCOLL_ID, :mCOLL_NAME, :mCOLL_NAME_E, :isaddnew, :resultcheck); END;",
+                    idParam, nameParam, nameEParam, isaddnewParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();
