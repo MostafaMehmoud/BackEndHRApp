@@ -21,6 +21,7 @@ public interface IUnitOfWork
     ICountryRepository CountryRepository { get; }
     ICollegeRepository CollegeRepository { get; }
     INeighborRepository NeighborRepository { get; }  
+    IKafilRepository KafilRepository { get; }   
     public Task StartTransaction();
     public Task CommitTransaction();
     public Task RollbackTransaction();

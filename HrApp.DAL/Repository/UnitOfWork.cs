@@ -36,6 +36,8 @@ public class UnitOfWork : IUnitOfWork
 
     public INeighborRepository NeighborRepository { get; private set; }
 
+    public IKafilRepository KafilRepository { get; private set; }
+
     public UnitOfWork(HrAppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -58,6 +60,7 @@ public class UnitOfWork : IUnitOfWork
         CountryRepository=CountryRepository??new CountryRepository(dbContext); 
         CollegeRepository= CollegeRepository??new CollegeRepository(dbContext);
         NeighborRepository= NeighborRepository??new NeighborRepository(dbContext);
+        KafilRepository=KafilRepository??new KafilRepository(dbContext);
     }
     public async Task CommitTransaction()
     {

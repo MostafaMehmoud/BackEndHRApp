@@ -94,6 +94,7 @@ public class Program
         builder.Services.AddTransient<ICountryService, CountryService>();   
         builder.Services.AddTransient<ICollegeService, CollegeService>();   
         builder.Services.AddTransient<INeighborService,NeighborService>();
+        builder.Services.AddTransient<IKafilService,KafilService>();
         builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         builder.Services.AddCors(options =>
         {
