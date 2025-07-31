@@ -25,7 +25,7 @@ namespace HrApp.BL.Services
             {
                 var Religion = new Religion
                 {
-                    Id = ""
+                    Id = "*"
                    ,
                     NameAr = createReligion.ReligionNameAr,
                     NameEn = createReligion.ReligionNameEn

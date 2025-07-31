@@ -27,7 +27,7 @@ namespace HrApp.BL.Services
             {
                 var City = new City
                 {
-                    Id = ""
+                    Id = "*"
                    ,
                     NameAr = createCity.CityNameAr,
                     NameEn = createCity.CityNameEn,

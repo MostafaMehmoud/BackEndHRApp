@@ -32,6 +32,7 @@ public class HrAppDbContext :DbContext
     public DbSet<College> Colleges { get; set; }    
     public DbSet<Neighbor> Neighbors { get; set; }
     public DbSet<Kafil> kafils { get; set; }
+    public DbSet<Department> Departments { get; set; }
     public HrAppDbContext()
     {
         

@@ -23,25 +23,25 @@ namespace HrApp.DAL.Repository
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("MRELIG_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME ", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("MRELIG_NAME ", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E ", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("MRELIG_NAME_E ", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.NameEn
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var ISADDNEWParam = new OracleParameter("ISADDNEW", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 1 // 1 for insert (0 if you want to update)
@@ -53,8 +53,8 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck); END;",
-                    idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
+                    "BEGIN HR_SADDRELIGIONSP(:MRELIG_ID, :MRELIG_NAME, :MRELIG_NAME_E, :ISADDNEW, :resultcheck); END;",
+                    idParam, nameParam, nameEParam, ISADDNEWParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();
@@ -77,25 +77,25 @@ namespace HrApp.DAL.Repository
         {
             try
             {
-                var idParam = new OracleParameter("mRELIG_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("MRELIG_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.Id
                 };
 
-                var nameParam = new OracleParameter("mRELIG_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("MRELIG_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mRELIG_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("MRELIG_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = religion.NameEn
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var ISADDNEWParam = new OracleParameter("ISADDNEW", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 0 // 0 means update
@@ -107,8 +107,8 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddRELIGIONSP(:mRELIG_ID, :mRELIG_NAME, :mRELIG_NAME_E, :isaddnew, :resultcheck ); END;",
-                    idParam, nameParam, nameEParam, isAddNewParam, resultCheckParam
+                    "BEGIN HR_SADDRELIGIONSP(:MRELIG_ID, :MRELIG_NAME, :MRELIG_NAME_E, :ISADDNEW, :resultcheck ); END;",
+                    idParam, nameParam, nameEParam, ISADDNEWParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();

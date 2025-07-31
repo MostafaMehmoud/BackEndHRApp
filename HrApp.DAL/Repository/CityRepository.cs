@@ -30,31 +30,31 @@ namespace HrApp.DAL.Repository
         {
             try
             {
-                var idParam = new OracleParameter("mCITY_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("MCITY_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.Id
                 };
 
-                var nameParam = new OracleParameter("mCITY_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("MCITY_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mCITY_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("MCITY_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.NameEn
                 };
 
-                var companyIdParam = new OracleParameter("mCNT_ID", OracleDbType.Varchar2)
+                var companyIdParam = new OracleParameter("MCNT_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.CompanyId // Make sure this is available in your City model
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var ISADDNEWParam = new OracleParameter("ISADDNEW", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 0 // 0 = update
@@ -66,8 +66,8 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SAddCITYSP(:mCITY_ID, :mCITY_NAME, :mCITY_NAME_E, :mCNT_ID, :isaddnew, :resultcheck ); END;",
-                    idParam, nameParam, nameEParam, companyIdParam, isAddNewParam, resultCheckParam
+                    "BEGIN HR_SADDCITYSP(:MCITY_ID, :MCITY_NAME, :MCITY_NAME_E, :MCNT_ID, :ISADDNEW, :resultcheck ); END;",
+                    idParam, nameParam, nameEParam, companyIdParam, ISADDNEWParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();
@@ -83,31 +83,31 @@ namespace HrApp.DAL.Repository
         {
             try
             {
-                var idParam = new OracleParameter("mCITY_ID", OracleDbType.Varchar2)
+                var idParam = new OracleParameter("MCITY_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.Id
                 };
 
-                var nameParam = new OracleParameter("mCITY_NAME", OracleDbType.Varchar2)
+                var nameParam = new OracleParameter("MCITY_NAME", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.NameAr
                 };
 
-                var nameEParam = new OracleParameter("mCITY_NAME_E", OracleDbType.Varchar2)
+                var nameEParam = new OracleParameter("MCITY_NAME_E", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.NameEn
                 };
 
-                var companyIdParam = new OracleParameter("mCNT_ID", OracleDbType.Varchar2)
+                var companyIdParam = new OracleParameter("MCNT_ID", OracleDbType.Varchar2)
                 {
                     Direction = ParameterDirection.Input,
                     Value = City.CompanyId // make sure this exists
                 };
 
-                var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
+                var ISADDNEWParam = new OracleParameter("ISADDNEW", OracleDbType.Int32)
                 {
                     Direction = ParameterDirection.Input,
                     Value = 1 // 1 = insert
@@ -119,8 +119,8 @@ namespace HrApp.DAL.Repository
                 };
 
                 await _dbContext.Database.ExecuteSqlRawAsync(
-                    "BEGIN HR_SADDCitySP(:mCITY_ID, :mCITY_NAME, :mCITY_NAME_E, :mCNT_ID, :isaddnew, :resultcheck ); END;",
-                    idParam, nameParam, nameEParam, companyIdParam, isAddNewParam, resultCheckParam
+                    "BEGIN HR_SADDCITYSP(:MCITY_ID, :MCITY_NAME, :MCITY_NAME_E, :MCNT_ID, :ISADDNEW, :resultcheck ); END;",
+                    idParam, nameParam, nameEParam, companyIdParam, ISADDNEWParam, resultCheckParam
                 );
 
                 string result = resultCheckParam.Value?.ToString();
