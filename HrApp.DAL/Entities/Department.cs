@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace HrApp.DAL.Entities;
-
+[Table("HR_DEPT")]
 public class Department
 {
     [Key]
@@ -15,10 +15,11 @@ public class Department
     [Column("DEPT_NAME_E")]
     public string? NameEn { get; set; }
 
+    [ForeignKey(nameof(Manage))]
     [Column("MNG_ID")]
     public string? ManagerId { get; set; }
 
-    // Example navigation property
     public virtual Manage? Manage { get; set; }
+
 }
 
