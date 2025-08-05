@@ -27,7 +27,7 @@ namespace HrApp.BL.Services
                     Id = "*",
                     NameAr = createDepartment.DepartmentNameAr,
                     NameEn = createDepartment.DepartmentNameEn,
-                    ManagerId = createDepartment.ManageId,
+                    ManageId = createDepartment.ManageId,
                 };
 
                 await _unitOfWork.DepartmentRepository.AddWithSPAsync(department);
@@ -146,7 +146,7 @@ namespace HrApp.BL.Services
 
                 department.NameAr = updateDepartment.DepartmentNameAr;
                 department.NameEn = updateDepartment.DepartmentNameEn;
-                department.ManagerId = updateDepartment.ManageId;
+                department.ManageId = updateDepartment.ManageId;
 
                 await _unitOfWork.DepartmentRepository.UpdateWithSPAsync(department);
 

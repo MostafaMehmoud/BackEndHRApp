@@ -17,7 +17,7 @@ public class Department
 
     [ForeignKey(nameof(Manage))]
     [Column("MNG_ID")]
-    public string? ManagerId { get; set; }
+    public string? ManageId { get; set; }
 
     public virtual Manage? Manage { get; set; }
 

@@ -66,7 +66,7 @@ namespace HrApp.DAL.Repository
             var managerIdParam = new OracleParameter("mMNG_ID", OracleDbType.Varchar2)
             {
                 Direction = ParameterDirection.Input,
-                Value = dept.ManagerId
+                Value = dept.ManageId
             };
 
             var isAddNewParam = new OracleParameter("isaddnew", OracleDbType.Int32)
